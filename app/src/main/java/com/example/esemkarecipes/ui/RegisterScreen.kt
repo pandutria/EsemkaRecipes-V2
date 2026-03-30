@@ -17,8 +17,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class RegisterScreen : AppCompatActivity() {
     private var _binding: ActivityRegisterScreenBinding? = null
@@ -51,9 +53,10 @@ class RegisterScreen : AppCompatActivity() {
             }
 
             try {
-                val date = OffsetDateTime.parse(binding.etDate.text.toString())
-                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                val date = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                LocalDate.parse(binding.etDate.text.toString(), date)
             } catch (e: Exception) {
+                e.printStackTrace()
                 Helper.toast(this, "Date birth must be format yyyy-MM-dd")
                 return@setOnClickListener
             }
@@ -72,7 +75,7 @@ class RegisterScreen : AppCompatActivity() {
             }
             val result = withContext(Dispatchers.IO) {
                 HttpHandler().request(
-                    "sign-in",
+                    "sign-up",
                     "POST",
                     rBody.toString()
                 )
@@ -81,7 +84,7 @@ class RegisterScreen : AppCompatActivity() {
             if (result.code in 200..300) {
                 startActivity(Intent(this@RegisterScreen, LoginScreen::class.java))
             } else {
-                Helper.toast(this@RegisterScreen, "Your data is not valid")
+                Helper.toast(this@RegisterScreen, "Register account is not success")
             }
         }
     }

@@ -117,11 +117,11 @@ class RecipeDetailScreen : AppCompatActivity() {
 
             if (result.code in 200..300) {
                 if (result.body == "true") {
+                    Log.d("debugDatas", result.body)
                     binding.imgLike.setImageResource(R.drawable.like)
                 } else {
                     binding.imgLike.setImageResource(R.drawable.unlike)
                 }
-
             }
         }
     }

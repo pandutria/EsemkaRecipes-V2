@@ -42,12 +42,28 @@
         android:layout_below="@id/header"
         android:background="@color/white">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/imgNoRecipe"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/no_recipe"/>
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/no_recipe"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recipe not found."
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/layoutContent"
